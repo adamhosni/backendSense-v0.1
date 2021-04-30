@@ -7,24 +7,24 @@ exports.create = (req, res, next) => {
     console.log('create device start');
     console.log(req.dNumber);
     console.log(req.dId);
-        
+
     const device = new Device({
        ...req.body
     });
-  
+
     device.save()
-        .then(() => res.status(201).json({ message: 'Device saved !' }))
+        .then(() => res.status(201).json({ message: 'Device saved !', success : Boolean = true }))
         .catch(error => {
-            res.status(400).json({ error });
+            res.status(400).json({ error, success : Boolean = false });
             console.log(error);
         }
     );
-    
+
   };
 
 exports.getAllDevices = (req, res, next) => {
     console.log("Je suis à devices get all!");
-    
+
     Device.find().then(
       (devices) => {
         res.status(200).json(devices);
@@ -46,7 +46,7 @@ exports.getAllDevices = (req, res, next) => {
     console.log("Je suis à modify device!");
     console.log(device);
     console.log("objectId=  "+mongoose.Types.ObjectId.createFromHexString(req.params.id));
-  
+
     Device.findOneAndUpdate({_id: mongoose.Types.ObjectId.createFromHexString(req.params.id)},device,{new: true ,upsert: true} ).then(
       () => {
         res.status(201).json({message:"DeviceSS updated successfully!"});
