@@ -1,12 +1,15 @@
 const express = require('express');
-const bodyParser = require('body-parser'); 
+const bodyParser = require('body-parser');
 const app = express();
 const mongoose = require('mongoose');
 
 const userRoutes = require('./routes/user');
 const deviceRoutes = require('./routes/device');
 
-mongoose.connect('mongodb://localhost/test',
+const dotenv = require('dotenv');
+dotenv.config();
+
+mongoose.connect(`mongodb://${process.env.DB_HOSTNAME}:${process.env.DB_PORT}/${process.env.DB_NAME}`,
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
