@@ -9,7 +9,7 @@ const deviceRoutes = require('./routes/device');
 const dotenv = require('dotenv');
 dotenv.config();
 
-mongoose.connect(`mongodb://${process.env.DB_HOSTNAME}:${process.env.DB_PORT}/${process.env.DB_NAME}`,
+mongoose.connect(`${process.env.DB_URL}`,
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
