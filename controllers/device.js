@@ -49,7 +49,7 @@ exports.getAllDevices = (req, res, next) => {
 
     Device.findOneAndUpdate({_id: mongoose.Types.ObjectId.createFromHexString(req.params.id)},device,{new: true ,upsert: true} ).then(
       () => {
-        res.status(201).json({message:"DeviceSS updated successfully!"});
+        res.status(201).json({message:"Device updated successfully!"});
       }
     ).catch(
       (error) => {
@@ -59,4 +59,32 @@ exports.getAllDevices = (req, res, next) => {
         console.log(error);
       }
     );
+  };
+
+  exports.deleteDevice = (req, res, next) => {
+    const device = {
+      ...req.body
+    };
+    console.log("Ich bin im device loschen!");
+    console.log(device);
+    console.log("objectId=  "+mongoose.Types.ObjectId.createFromHexString(req.params.id));
+
+    Device.deleteOne({_id: mongoose.Types.ObjectId.createFromHexString(req.params.id)}, (err, obj) =>{
+
+      if (err) throw err;
+      res.status(201).json({message:"Device deleted successfully!", success = true});
+
+    } );
+    // .then(
+    //   () => {
+    //     res.status(201).json({message:"Device deleted successfully!"});
+    //   }
+    // ).catch(
+    //   (error) => {
+    //     res.status(400).json({
+    //       error: error
+    //     });
+    //     console.log(error);
+    //   }
+    // );
   };
