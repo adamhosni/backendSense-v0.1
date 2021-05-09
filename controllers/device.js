@@ -13,7 +13,7 @@ exports.create = (req, res, next) => {
     });
 
     device.save()
-        .then(() => res.status(201).json({ message: 'Device saved !', success : Boolean = true }))
+        .then(() => res.status(201).json({ message: 'Device saved !'}))
         .catch(error => {
             res.status(400).json({ error, success : Boolean = false });
             console.log(error);
@@ -72,7 +72,7 @@ exports.getAllDevices = (req, res, next) => {
     Device.deleteOne({_id: mongoose.Types.ObjectId.createFromHexString(req.params.id)}, (err, obj) =>{
 
       if (err) throw err;
-      res.status(201).json({message:'Device deleted successfully!', success: Boolean = true});
+      res.status(201).json({message:'Device deleted successfully!'});
 
     } );
     // .then(
