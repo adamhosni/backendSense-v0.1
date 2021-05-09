@@ -72,7 +72,7 @@ exports.getAllDevices = (req, res, next) => {
     Device.deleteOne({_id: mongoose.Types.ObjectId.createFromHexString(req.params.id)}, (err, obj) =>{
 
       if (err) throw err;
-      res.status(201).json({message:"Device deleted successfully!", success = true});
+      res.status(201).json({message:'Device deleted successfully!', success: Boolean = true});
 
     } );
     // .then(
